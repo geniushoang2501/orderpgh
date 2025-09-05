@@ -34,7 +34,7 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 lg:p-8">
         <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-yellow-900">Phở Gà Hớn</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-900">Phở Gà Hớn AI</h1>
             <p class="text-gray-600 mt-2">Cỗ máy Tăng trưởng - Đặt hàng và trải nghiệm ngay!</p>
         </header>
 
@@ -143,28 +143,35 @@
     <script>
         // --- DATA ---
         const menuData = [
-            { id: 1, name: 'Phở Gà (Size M)', category: 'Món Chính', price: 48000, desc: 'Tô phở gà truyền thống, size vừa.' },
-            { id: 2, name: 'Phở Gà (Size L)', category: 'Món Chính', price: 58000, desc: 'Tô phở lớn hơn, nhiều bánh và thịt.' },
-            { id: 3, name: 'Phở Gà (Size XL)', category: 'Món Chính', price: 68000, desc: 'Tô phở cực lớn cho người ăn khỏe.' },
-            { id: 4, name: 'Trà Chanh / Quất', category: 'Đồ uống', price: 25000, desc: 'Giải nhiệt sảng khoái.' },
-            { id: 7, name: 'Trứng luộc', category: 'Topping Thêm', price: 7500, desc: 'Trứng gà ta luộc lòng đào.' },
+            // Món Chính
+            { id: 1, name: 'Phở Gà (Size M)', category: 'Món Chính', price: 35000, desc: 'Tô phở gà truyền thống, size vừa.' },
+            { id: 2, name: 'Phở Gà (Size L)', category: 'Món Chính', price: 45000, desc: 'Tô phở lớn hơn, nhiều bánh và thịt.' },
+            { id: 3, name: 'Phở Gà (Size XL)', category: 'Món Chính', price: 55000, desc: 'Tô phở cực lớn cho người ăn khỏe.' },
+            // Đồ uống
+            { id: 4, name: 'Trà Chanh / Quất', category: 'Đồ uống', price: 15000, desc: 'Giải nhiệt sảng khoái.' },
+            // Topping Thêm
+            { id: 7, name: 'Trứng luộc', category: 'Topping Thêm', price: 5000, desc: 'Trứng gà ta luộc lòng đào.' },
             { id: 10, name: 'Tiết', category: 'Topping Thêm', price: 1000, desc: 'Tiết luộc mềm, béo ngậy.' },
-            { id: 11, name: 'Combo Khởi Động', category: 'Combo Chiến Lược', price: 49000, originalPrice: 51000, desc: 'Phở M + Quẩy. Tiết kiệm hơn!' },
-            { id: 12, name: 'Combo No Nê', category: 'Combo Chiến Lược', price: 79000, originalPrice: 83000, desc: 'Phở L + Trà Chanh. Tiết kiệm hơn!' },
-            { id: 13, name: 'Deal Độc Quyền 69K', category: 'Combo Chiến Lược', price: 69000, desc: 'Phở M + Trà Chanh. Giá cực tốt!' },
+            { id: 19, name: 'Trứng non', category: 'Topping Thêm', price: 10000, desc: 'Trứng non béo ngậy.' },
+            { id: 20, name: 'Tràng', category: 'Topping Thêm', price: 5000, desc: 'Tràng giòn sần sật.' },
+            { id: 22, name: 'Tim', category: 'Topping Thêm', price: 5000, desc: 'Tim gà tươi ngon.' },
+            { id: 23, name: 'Gan', category: 'Topping Thêm', price: 3000, desc: 'Gan gà bùi béo.' },
+            { id: 24, name: 'Quẩy', category: 'Topping Thêm', price: 3000, desc: 'Giòn rụm ăn kèm phở.' },
+            { id: 25, name: 'Mề', category: 'Topping Thêm', price: 3000, desc: 'Mề gà giòn dai.' },
+            // Combo
+            { id: 11, name: 'Combo Khởi Động', category: 'Combo Chiến Lược', price: 36000, originalPrice: 38000, desc: 'Phở M + Quẩy. Tiết kiệm hơn!' },
+            { id: 12, name: 'Combo No Nê', category: 'Combo Chiến Lược', price: 57000, originalPrice: 60000, desc: 'Phở L + Trà Chanh. Tiết kiệm hơn!' },
+            { id: 13, name: 'Deal Độc Quyền', category: 'Combo Chiến Lược', price: 48000, originalPrice: 50000, desc: 'Phở M + Trà Chanh. Giá cực tốt!' },
+            // Tùy chọn
             { id: 14, name: 'Phở', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi phở truyền thống.' },
             { id: 15, name: 'Mì', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi mì trứng vàng óng.' },
             { id: 16, name: 'Bún', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi bún tươi.' },
             { id: 5, name: 'Lườn', category: 'Tùy chọn Thịt', price: 0, desc: 'Phần thịt ức gà mềm.' },
             { id: 17, name: 'Lưng Cánh', category: 'Tùy chọn Thịt', price: 0, desc: 'Phần thịt thơm, đậm đà.' },
             { id: 18, name: 'Đùi', category: 'Tùy chọn Thịt', price: 5000, desc: 'Thịt đùi dai ngon, thêm 5,000đ.' },
-            { id: 19, name: 'Trứng non', category: 'Topping Thêm', price: 15000, desc: 'Trứng non béo ngậy.' },
-            { id: 20, name: 'Tràng', category: 'Topping Thêm', price: 9000, desc: 'Tràng giòn sần sật.' },
-            //{ id: 21, name: 'Xúc xích', category: 'Topping Thêm', price: 9000, desc: 'Xúc xích thơm ngon.' },
-            { id: 22, name: 'Tim', category: 'Topping Thêm', price: 10000, desc: 'Tim gà tươi ngon.' },
-            { id: 23, name: 'Gan', category: 'Topping Thêm', price: 6000, desc: 'Gan gà bùi béo.' },
-            { id: 24, name: 'Quẩy', category: 'Topping Thêm', price: 3000, desc: 'Giòn rụm ăn kèm phở.' },
-            { id: 25, name: 'Mề', category: 'Topping Thêm', price: 3000, desc: 'Mề gà giòn dai.' },
+            // New option
+            { id: 26, name: 'Phở nước', category: 'Món phở', price: 0, desc: 'Phở chan nước dùng truyền thống.' },
+            { id: 27, name: 'Phở trộn', category: 'Món phở', price: 0, desc: 'Phở trộn với sốt chua ngọt đặc biệt.' }
         ];
 
         // --- STATE ---
@@ -292,10 +299,23 @@
             const item = menuData.find(i => i.id === itemId);
             modalItemName.textContent = `Tùy chỉnh: ${item.name}`;
             
+            const styleOptions = menuData.filter(opt => opt.category === 'Món phở');
+            const styleOptionsHtml = `
+                <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Món phở <span class="text-red-500">*</span></h4>
+                    ${styleOptions.map((opt, index) => `
+                        <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <span class="text-gray-800">${opt.name}</span>
+                            <input type="radio" name="style-option" class="form-radio h-5 w-5 text-yellow-600 focus:ring-yellow-500" data-option-id="${opt.id}" ${index === 0 ? 'checked' : ''}>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            
             const noodleOptions = menuData.filter(opt => opt.category === 'Tùy chọn Sợi');
             const noodleOptionsHtml = `
                 <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Sợi</h4>
+                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Sợi <span class="text-red-500">*</span></h4>
                     ${noodleOptions.map((opt, index) => `
                         <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
                             <span class="text-gray-800">${opt.name}</span>
@@ -308,7 +328,7 @@
             const meatOptions = menuData.filter(opt => opt.category === 'Tùy chọn Thịt');
             const meatOptionsHtml = `
                 <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Thịt</h4>
+                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Thịt <span class="text-red-500">*</span></h4>
                     ${meatOptions.map((opt, index) => `
                         <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
                             <div>
@@ -326,7 +346,7 @@
                 if (optionsInCategory.length === 0) return '';
                 return `
                     <div class="mb-4">
-                        <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">${category}</h4>
+                        <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Topping thêm</h4>
                         ${optionsInCategory.map(opt => `
                             <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
                                 <div>
@@ -340,7 +360,7 @@
                 `;
             }).join('');
 
-            modalOptionsContainer.innerHTML = noodleOptionsHtml + meatOptionsHtml + otherOptionsHtml;
+            modalOptionsContainer.innerHTML = styleOptionsHtml + noodleOptionsHtml + meatOptionsHtml + otherOptionsHtml;
             addCustomizedItemBtn.dataset.baseItemId = itemId;
             customizationModal.classList.remove('hidden');
         };
@@ -360,12 +380,19 @@
         
         const handleAddCustomizedItem = () => {
             const baseItemId = parseInt(addCustomizedItemBtn.dataset.baseItemId);
+            
+            const selectedStyleRadio = modalOptionsContainer.querySelector('input[name="style-option"]:checked');
+            const styleOptionId = selectedStyleRadio ? [parseInt(selectedStyleRadio.dataset.optionId)] : [];
+            
             const selectedNoodleRadio = modalOptionsContainer.querySelector('input[name="noodle-option"]:checked');
             const noodleOptionId = selectedNoodleRadio ? [parseInt(selectedNoodleRadio.dataset.optionId)] : [];
+            
             const selectedMeatRadio = modalOptionsContainer.querySelector('input[name="meat-option"]:checked');
             const meatOptionId = selectedMeatRadio ? [parseInt(selectedMeatRadio.dataset.optionId)] : [];
+            
             const toppingOptionsIds = [...modalOptionsContainer.querySelectorAll('input[type="checkbox"]:checked')].map(input => parseInt(input.dataset.optionId));
-            const selectedOptions = [...noodleOptionId, ...meatOptionId, ...toppingOptionsIds];
+            
+            const selectedOptions = [...styleOptionId, ...noodleOptionId, ...meatOptionId, ...toppingOptionsIds];
             const cartItemId = Date.now().toString();
             cart.push({ cartItemId, baseItemId, options: selectedOptions });
             renderCart();
@@ -400,10 +427,8 @@
             const accountNumber = "8881995222";
             const accountName = "DAO HONG NGA";
             
-            // FIXED: Directly create the image URL for the QR code.
             const qrImageUrl = `https://img.vietqr.io/image/${bankId}-${accountNumber}-compact2.png?amount=${currentTotal}&addInfo=${encodeURIComponent(transferContent)}&accountName=${encodeURIComponent(accountName)}`;
             
-            // FIXED: Display the image directly instead of using qrcode.js
             qrCodeContainer.innerHTML = `<img src="${qrImageUrl}" alt="Mã QR thanh toán" class="w-full h-full">`;
 
             paymentAmountEl.textContent = formatCurrency(currentTotal);
@@ -468,3 +493,4 @@
 
 </body>
 </html>
+
