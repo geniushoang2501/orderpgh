@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đặt Hàng Phở Gà Hớn</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- REMOVED qrcode.js as it's not needed. We will use the image service directly. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,10 +22,6 @@
             100% { transform: scale(1); }
         }
         .pop-animation { animation: pop 0.3s ease-out; }
-        /* Style for the QR code image itself */
-        #qr-code-container img {
-            margin: auto;
-        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -34,7 +29,7 @@
     <!-- Main Container -->
     <div class="container mx-auto p-4 lg:p-8">
         <header class="text-center mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold text-yellow-900">Phở Gà Hớn AI</h1>
+            <h1 class="text-4xl md:text-5xl font-bold text-yellow-900">Phở Gà Hớn</h1>
             <p class="text-gray-600 mt-2">Cỗ máy Tăng trưởng - Đặt hàng và trải nghiệm ngay!</p>
         </header>
 
@@ -78,7 +73,7 @@
     <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
             <div class="p-6 border-b">
-                <h3 class="text-2xl font-bold text-gray-900">Thông tin giao hàng</h3>
+                <h3 class="text-2xl font-bold text-gray-900">Thông tin đơn hàng</h3>
             </div>
             <div class="p-6 space-y-4">
                 <div>
@@ -86,12 +81,12 @@
                     <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
                 </div>
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700">Địa chỉ <span class="text-red-500">*</span></label>
-                    <input type="text" id="address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
-                </div>
-                <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Tên khách hàng (không bắt buộc)</label>
                     <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
+                </div>
+                <div>
+                    <label for="order-note" class="block text-sm font-medium text-gray-700">Ghi chú đơn hàng (không bắt buộc)</label>
+                    <textarea id="order-note" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500" placeholder="VD: Giao nhanh giúp mình, ..."></textarea>
                 </div>
                 <p id="checkout-error" class="text-red-500 text-sm hidden">Vui lòng điền đầy đủ thông tin bắt buộc.</p>
             </div>
@@ -102,23 +97,16 @@
         </div>
     </div>
 
-    <!-- Payment Modal -->
-    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+    <!-- Order Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
         <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Thanh toán đơn hàng</h3>
-            <p class="text-gray-600 mb-6">Vui lòng quét mã QR để thanh toán qua ứng dụng ngân hàng.</p>
-            <div id="qr-code-container" class="mb-6 w-64 h-64 mx-auto flex items-center justify-center bg-gray-100 rounded-lg">
-                <!-- QR Image will be inserted here -->
-            </div>
-            <div class="text-left bg-yellow-50 p-4 rounded-lg border border-yellow-200 space-y-2">
-                <p><strong>Ngân hàng:</strong> Techcombank</p>
-                <p><strong>Chủ tài khoản:</strong> DAO HONG NGA</p>
-                <p><strong>Số tài khoản:</strong> 8881995222</p>
-                <p><strong>Số tiền:</strong> <span id="payment-amount" class="font-bold text-yellow-700"></span></p>
-                <p><strong>Nội dung:</strong> <span id="payment-content" class="font-bold text-gray-800"></span></p>
-            </div>
-            <button id="close-payment-modal-btn" class="w-full mt-8 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">
-                Hoàn tất
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Đặt hàng thành công!</h3>
+            <p class="text-gray-600 mb-6">Cảm ơn bạn đã đặt hàng. Phở Gà Hớn sẽ chuẩn bị món ngay!</p>
+            <button id="close-success-modal-btn" class="w-full mt-8 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                Tuyệt vời!
             </button>
         </div>
     </div>
@@ -131,6 +119,10 @@
             </div>
             <div class="p-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
                 <div id="modal-options-container"></div>
+                <div class="mt-4">
+                    <label for="item-note" class="block text-sm font-medium text-gray-700">Ghi chú cho món</label>
+                    <input type="text" id="item-note" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500" placeholder="VD: Không hành, nhiều giá...">
+                </div>
             </div>
             <div class="p-6 bg-gray-50 rounded-b-lg flex justify-end gap-4">
                  <button id="cancel-customization-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">Hủy</button>
@@ -139,39 +131,62 @@
         </div>
     </div>
 
+    <!-- JSON Output Modal -->
+    <div id="json-output-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full">
+            <div class="p-6 border-b">
+                <h3 class="text-2xl font-bold text-gray-900">JSON Gửi Đi (Mẫu)</h3>
+            </div>
+            <div class="p-6">
+                <pre id="json-output-content" class="bg-gray-100 p-4 rounded-md text-sm overflow-auto max-h-[60vh] custom-scrollbar"></pre>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-b-lg flex justify-end gap-4">
+                 <button id="close-json-modal-btn" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors">Đã hiểu & Hoàn tất</button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // --- DATA ---
         const menuData = [
-            // Món Chính
-            { id: 1, name: 'Phở Gà (Size M)', category: 'Món Chính', price: 35000, desc: 'Tô phở gà truyền thống, size vừa.' },
-            { id: 2, name: 'Phở Gà (Size L)', category: 'Món Chính', price: 45000, desc: 'Tô phở lớn hơn, nhiều bánh và thịt.' },
-            { id: 3, name: 'Phở Gà (Size XL)', category: 'Món Chính', price: 55000, desc: 'Tô phở cực lớn cho người ăn khỏe.' },
+            // Món Chính (Giá cơ sở là Size M)
+            { id: 1, name: 'Phở Gà Nước', category: 'Món Chính', price: 35000, desc: 'Phở gà truyền thống chan nước dùng.' },
+            { id: 2, name: 'Phở Gà Trộn', category: 'Món Chính', price: 35000, desc: 'Phở gà trộn sốt chua ngọt đặc biệt.' },
+            
             // Đồ uống
-            { id: 4, name: 'Trà Chanh / Quất', category: 'Đồ uống', price: 15000, desc: 'Giải nhiệt sảng khoái.' },
+            { id: 4, name: 'Trà Chanh', category: 'Đồ uống', price: 15000, desc: 'Trà chanh giải nhiệt sảng khoái.' },
+            { id: 28, name: 'Trà Quất', category: 'Đồ uống', price: 15000, desc: 'Trà quất thơm, giải nhiệt.' },
+            { id: 38, name: 'Trà Đá', category: 'Đồ uống', price: 3000, desc: 'Trà đá mát lạnh.' },
+            // Món phụ
+            { id: 24, name: 'Quẩy', category: 'Món phụ', price: 2000, desc: 'Giòn rụm ăn kèm phở.' },
+            { id: 7, name: 'Trứng luộc lòng đào', category: 'Món phụ', price: 5000, desc: 'Trứng gà ta luộc lòng đào.' },
+            { id: 39, name: 'Trứng trần', category: 'Món phụ', price: 5000, desc: 'Trứng gà chần béo ngậy.' },
             // Topping Thêm
-            { id: 7, name: 'Trứng luộc', category: 'Topping Thêm', price: 5000, desc: 'Trứng gà ta luộc lòng đào.' },
             { id: 10, name: 'Tiết', category: 'Topping Thêm', price: 1000, desc: 'Tiết luộc mềm, béo ngậy.' },
-            { id: 19, name: 'Trứng non', category: 'Topping Thêm', price: 10000, desc: 'Trứng non béo ngậy.' },
+            { id: 19, name: 'Trứng non', category: 'Topping Thêm', price: 15000, desc: 'Trứng non béo ngậy.' },
             { id: 20, name: 'Tràng', category: 'Topping Thêm', price: 5000, desc: 'Tràng giòn sần sật.' },
             { id: 22, name: 'Tim', category: 'Topping Thêm', price: 5000, desc: 'Tim gà tươi ngon.' },
             { id: 23, name: 'Gan', category: 'Topping Thêm', price: 3000, desc: 'Gan gà bùi béo.' },
-            { id: 24, name: 'Quẩy', category: 'Topping Thêm', price: 3000, desc: 'Giòn rụm ăn kèm phở.' },
             { id: 25, name: 'Mề', category: 'Topping Thêm', price: 3000, desc: 'Mề gà giòn dai.' },
-            // Combo
-            { id: 11, name: 'Combo Khởi Động', category: 'Combo Chiến Lược', price: 36000, originalPrice: 38000, desc: 'Phở M + Quẩy. Tiết kiệm hơn!' },
-            { id: 12, name: 'Combo No Nê', category: 'Combo Chiến Lược', price: 57000, originalPrice: 60000, desc: 'Phở L + Trà Chanh. Tiết kiệm hơn!' },
-            { id: 13, name: 'Deal Độc Quyền', category: 'Combo Chiến Lược', price: 48000, originalPrice: 50000, desc: 'Phở M + Trà Chanh. Giá cực tốt!' },
-            // Tùy chọn
-            { id: 14, name: 'Phở', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi phở truyền thống.' },
-            { id: 15, name: 'Mì', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi mì trứng vàng óng.' },
-            { id: 16, name: 'Bún', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi bún tươi.' },
+            
+            // Tùy chọn Sợi
+            { id: 29, name: 'Phở 150g', category: 'Tùy chọn Sợi', price: 0, desc: 'Lượng phở tiêu chuẩn.' },
+            { id: 30, name: 'Phở 200g', category: 'Tùy chọn Sợi', price: 0, desc: 'Nhiều phở hơn.' },
+            { id: 31, name: 'Phở 250g', category: 'Tùy chọn Sợi', price: 0, desc: 'Cực nhiều phở.' },
+            { id: 32, name: 'Bún', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi bún tươi.' },
+            { id: 33, name: 'Mì', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi mì trứng vàng óng.' },
+            { id: 34, name: 'Mì 2 gói', category: 'Tùy chọn Sợi', price: 0, desc: 'Gấp đôi mì.' },
+            
+            // Tùy chọn Thịt
             { id: 5, name: 'Lườn', category: 'Tùy chọn Thịt', price: 0, desc: 'Phần thịt ức gà mềm.' },
             { id: 17, name: 'Lưng Cánh', category: 'Tùy chọn Thịt', price: 0, desc: 'Phần thịt thơm, đậm đà.' },
             { id: 18, name: 'Đùi', category: 'Tùy chọn Thịt', price: 5000, desc: 'Thịt đùi dai ngon, thêm 5,000đ.' },
-            // New option
-            { id: 26, name: 'Phở nước', category: 'Món phở', price: 0, desc: 'Phở chan nước dùng truyền thống.' },
-            { id: 27, name: 'Phở trộn', category: 'Món phở', price: 0, desc: 'Phở trộn với sốt chua ngọt đặc biệt.' }
+
+            // Tùy chọn Size
+            { id: 35, name: 'Size M', category: 'Tùy chọn Size', price: 0, desc: 'Size tiêu chuẩn (giá gốc).' },
+            { id: 36, name: 'Size L', category: 'Tùy chọn Size', price: 10000, desc: 'Thêm 10,000đ.' },
+            { id: 37, name: 'Size XL', category: 'Tùy chọn Size', price: 20000, desc: 'Thêm 20,000đ.' }
         ];
 
         // --- STATE ---
@@ -198,20 +213,23 @@
         const confirmCheckoutBtn = document.getElementById('confirm-checkout-btn');
         const checkoutError = document.getElementById('checkout-error');
         const phoneInput = document.getElementById('phone');
-        const addressInput = document.getElementById('address');
+        const nameInput = document.getElementById('name');
+        const orderNoteInput = document.getElementById('order-note');
 
-        const paymentModal = document.getElementById('payment-modal');
-        const closePaymentModalBtn = document.getElementById('close-payment-modal-btn');
-        const qrCodeContainer = document.getElementById('qr-code-container');
-        const paymentAmountEl = document.getElementById('payment-amount');
-        const paymentContentEl = document.getElementById('payment-content');
+        const successModal = document.getElementById('success-modal');
+        const closeSuccessModalBtn = document.getElementById('close-success-modal-btn');
+
+        const jsonOutputModal = document.getElementById('json-output-modal');
+        const jsonOutputContent = document.getElementById('json-output-content');
+        const closeJsonModalBtn = document.getElementById('close-json-modal-btn');
+
 
         // --- FUNCTIONS ---
         const formatCurrency = (number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number).replace('₫', 'VNĐ');
 
         const renderMenu = () => {
             const categories = [...new Set(menuData.map(item => item.category))];
-            const categoryOrder = ['Combo Chiến Lược', 'Món Chính', 'Đồ uống'];
+            const categoryOrder = ['Món Chính', 'Món phụ', 'Đồ uống']; // Thêm Món phụ
             const sortedCategories = categories.filter(c => categoryOrder.includes(c)).sort((a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b));
 
             menuContainer.innerHTML = sortedCategories.map(category => {
@@ -251,13 +269,28 @@
                 emptyCartMessage.style.display = 'none';
                 cartItemsContainer.innerHTML = cart.map(cartItem => {
                     const baseItem = menuData.find(item => item.id === cartItem.baseItemId);
+                    const optionsPrice = cartItem.options.reduce((optionSum, optionId) => {
+                        return optionSum + menuData.find(item => item.id === optionId).price;
+                    }, 0);
+                    const unitPrice = baseItem.price + optionsPrice;
+
                     return `
                         <div class="mb-4 py-2 border-b border-gray-100">
                             <div class="flex justify-between items-start">
                                 <p class="font-bold text-gray-800">${baseItem.name}</p>
                                 <button class="remove-from-cart-btn text-red-500 hover:text-red-700 font-semibold" data-cart-item-id="${cartItem.cartItemId}">Xóa</button>
                             </div>
-                            <p class="text-sm text-yellow-600 font-semibold">${formatCurrency(baseItem.price)}</p>
+                            
+                            <!-- Quantity and Price -->
+                            <div class="flex justify-between items-center mt-2">
+                                <div class="flex items-center gap-3">
+                                    <button class="decrease-quantity-btn text-yellow-600 font-bold text-xl" data-cart-item-id="${cartItem.cartItemId}">-</button>
+                                    <span class="font-bold text-gray-800 text-lg">${cartItem.quantity}</span>
+                                    <button class="increase-quantity-btn text-yellow-600 font-bold text-xl" data-cart-item-id="${cartItem.cartItemId}">+</button>
+                                </div>
+                                <p class="text-sm text-yellow-600 font-semibold">${formatCurrency(unitPrice * cartItem.quantity)}</p>
+                            </div>
+                            
                             ${cartItem.options.length > 0 ? `
                                 <ul class="mt-2 pl-4 list-disc list-inside text-sm text-gray-600">
                                     ${cartItem.options.map(optionId => {
@@ -267,6 +300,7 @@
                                     }).join('')}
                                 </ul>
                             ` : ''}
+                            ${cartItem.note ? `<p class="text-sm text-gray-500 italic mt-1 pl-1">Ghi chú: ${cartItem.note}</p>` : ''}
                         </div>
                     `;
                 }).join('');
@@ -280,14 +314,14 @@
                 const optionsPrice = cartItem.options.reduce((optionSum, optionId) => {
                     return optionSum + menuData.find(item => item.id === optionId).price;
                 }, 0);
-                return sum + baseItemPrice + optionsPrice;
+                return sum + (baseItemPrice + optionsPrice) * cartItem.quantity;
             }, 0);
             
             currentTotal = total; // Store total for later use
             totalPriceEl.textContent = formatCurrency(total);
             placeOrderBtn.disabled = cart.length === 0;
 
-            const totalItems = cart.length;
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             mobileCartCount.textContent = totalItems;
             mobileCartCount.classList.remove('pop-animation');
             void mobileCartCount.offsetWidth;
@@ -299,14 +333,17 @@
             const item = menuData.find(i => i.id === itemId);
             modalItemName.textContent = `Tùy chỉnh: ${item.name}`;
             
-            const styleOptions = menuData.filter(opt => opt.category === 'Món phở');
-            const styleOptionsHtml = `
+            const sizeOptions = menuData.filter(opt => opt.category === 'Tùy chọn Size');
+            const sizeOptionsHtml = `
                 <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Món phở <span class="text-red-500">*</span></h4>
-                    ${styleOptions.map((opt, index) => `
+                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Kích cỡ <span class="text-red-500">*</span></h4>
+                    ${sizeOptions.map((opt, index) => `
                         <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
-                            <span class="text-gray-800">${opt.name}</span>
-                            <input type="radio" name="style-option" class="form-radio h-5 w-5 text-yellow-600 focus:ring-yellow-500" data-option-id="${opt.id}" ${index === 0 ? 'checked' : ''}>
+                            <div>
+                                <span class="text-gray-800">${opt.name}</span>
+                                ${opt.price > 0 ? `<span class="text-sm text-yellow-600 ml-2">+${formatCurrency(opt.price)}</span>` : ''}
+                            </div>
+                            <input type="radio" name="size-option" class="form-radio h-5 w-5 text-yellow-600 focus:ring-yellow-500" data-option-id="${opt.id}" ${index === 0 ? 'checked' : ''}>
                         </label>
                     `).join('')}
                 </div>
@@ -360,7 +397,8 @@
                 `;
             }).join('');
 
-            modalOptionsContainer.innerHTML = styleOptionsHtml + noodleOptionsHtml + meatOptionsHtml + otherOptionsHtml;
+            modalOptionsContainer.innerHTML = sizeOptionsHtml + noodleOptionsHtml + meatOptionsHtml + otherOptionsHtml;
+            document.getElementById('item-note').value = ''; // Xóa ghi chú cũ
             addCustomizedItemBtn.dataset.baseItemId = itemId;
             customizationModal.classList.remove('hidden');
         };
@@ -372,8 +410,15 @@
             if (item.category === 'Món Chính') {
                 openCustomizationModal(itemId);
             } else {
-                const cartItemId = Date.now().toString();
-                cart.push({ cartItemId, baseItemId: itemId, options: [] });
+                // Logic gộp số lượng cho đồ uống, topping
+                const cartItemId = `${itemId}-[]-`; // ID đơn giản cho món không tùy chọn
+                const existingItem = cart.find(item => item.cartItemId === cartItemId);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ cartItemId, baseItemId: itemId, options: [], note: '', quantity: 1 });
+                }
                 renderCart();
             }
         };
@@ -381,8 +426,8 @@
         const handleAddCustomizedItem = () => {
             const baseItemId = parseInt(addCustomizedItemBtn.dataset.baseItemId);
             
-            const selectedStyleRadio = modalOptionsContainer.querySelector('input[name="style-option"]:checked');
-            const styleOptionId = selectedStyleRadio ? [parseInt(selectedStyleRadio.dataset.optionId)] : [];
+            const selectedSizeRadio = modalOptionsContainer.querySelector('input[name="size-option"]:checked');
+            const sizeOptionId = selectedSizeRadio ? [parseInt(selectedSizeRadio.dataset.optionId)] : [];
             
             const selectedNoodleRadio = modalOptionsContainer.querySelector('input[name="noodle-option"]:checked');
             const noodleOptionId = selectedNoodleRadio ? [parseInt(selectedNoodleRadio.dataset.optionId)] : [];
@@ -392,9 +437,23 @@
             
             const toppingOptionsIds = [...modalOptionsContainer.querySelectorAll('input[type="checkbox"]:checked')].map(input => parseInt(input.dataset.optionId));
             
-            const selectedOptions = [...styleOptionId, ...noodleOptionId, ...meatOptionId, ...toppingOptionsIds];
-            const cartItemId = Date.now().toString();
-            cart.push({ cartItemId, baseItemId, options: selectedOptions });
+            const itemNote = document.getElementById('item-note').value.trim();
+            
+            // Sắp xếp các tùy chọn để tạo ID nhất quán
+            const selectedOptions = [...sizeOptionId, ...noodleOptionId, ...meatOptionId, ...toppingOptionsIds].sort((a, b) => a - b);
+            
+            // Tạo ID độc nhất dựa trên món, tùy chọn và ghi chú
+            const cartItemId = `${baseItemId}-${JSON.stringify(selectedOptions)}-${itemNote}`;
+            
+            // Logic gộp số lượng
+            const existingItem = cart.find(item => item.cartItemId === cartItemId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ cartItemId, baseItemId, options: selectedOptions, note: itemNote, quantity: 1 });
+            }
+            
             renderCart();
             closeCustomizationModal();
         };
@@ -404,49 +463,124 @@
             renderCart();
         };
 
+        const handleIncreaseQuantity = (cartItemId) => {
+            const item = cart.find(item => item.cartItemId === cartItemId);
+            if (item) {
+                item.quantity += 1;
+                renderCart();
+            }
+        };
+
+        const handleDecreaseQuantity = (cartItemId) => {
+            const item = cart.find(item => item.cartItemId === cartItemId);
+            if (item) {
+                item.quantity -= 1;
+                if (item.quantity === 0) {
+                    handleRemoveFromCart(cartItemId);
+                } else {
+                    renderCart();
+                }
+            }
+        };
+
         const handlePlaceOrder = () => {
             if (cart.length > 0) {
+                checkoutError.classList.add('hidden'); // Ẩn lỗi cũ khi mở modal
                 checkoutModal.classList.remove('hidden');
             }
         };
 
-        const handleConfirmCheckout = () => {
+        const handleConfirmCheckout = async () => {
             const phone = phoneInput.value.trim();
-            const address = addressInput.value.trim();
-
-            if (!phone || !address) {
+            const name = nameInput.value.trim();
+            const orderNote = orderNoteInput.value.trim();
+            
+            // === VALIDATION ===
+            if (!phone) {
+                checkoutError.textContent = 'Vui lòng nhập số điện thoại.';
                 checkoutError.classList.remove('hidden');
-                return;
+                return; // Dừng lại nếu SĐT rỗng
             }
+            // === END VALIDATION ===
+            
+            // Thêm trạng thái loading
+            confirmCheckoutBtn.disabled = true;
+            confirmCheckoutBtn.textContent = 'Đang xử lý...';
             checkoutError.classList.add('hidden');
             
-            const orderId = `PGH${Date.now()}`;
-            const transferContent = `${orderId} ${phone}`.replace(/\s/g, ''); // Remove spaces for QR code
+            // Nâng cấp logic tạo mã đơn hàng để chống trùng lặp
+            const randomSuffix = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            const orderId = `PGH${Date.now()}${randomSuffix}`;
             
-            const bankId = "970407"; // Techcombank
-            const accountNumber = "8881995222";
-            const accountName = "DAO HONG NGA";
-            
-            const qrImageUrl = `https://img.vietqr.io/image/${bankId}-${accountNumber}-compact2.png?amount=${currentTotal}&addInfo=${encodeURIComponent(transferContent)}&accountName=${encodeURIComponent(accountName)}`;
-            
-            qrCodeContainer.innerHTML = `<img src="${qrImageUrl}" alt="Mã QR thanh toán" class="w-full h-full">`;
+            // Xây dựng đối tượng JSON
+            const finalJson = {
+                "Đơn hàng": orderId,
+                "Tên": name || "Không cung cấp",
+                "SĐT": phone, // Đã bắt buộc
+                "Ghi chú đơn": orderNote || "Không có",
+                "Giá trị": currentTotal,
+                "Các món": cart.map(cartItem => {
+                    const baseItem = menuData.find(item => item.id === cartItem.baseItemId);
+                    const baseItemPrice = baseItem.price;
+                    const optionsPrice = cartItem.options.reduce((optionSum, optionId) => {
+                        return optionSum + menuData.find(item => item.id === optionId).price;
+                    }, 0);
+                    const unitPrice = baseItemPrice + optionsPrice;
 
-            paymentAmountEl.textContent = formatCurrency(currentTotal);
-            paymentContentEl.textContent = `${orderId} ${phone}`;
+                    return {
+                        "Tên": baseItem.name,
+                        "Đơn giá": unitPrice,
+                        "Số lượng": cartItem.quantity,
+                        "Thành tiền": unitPrice * cartItem.quantity,
+                        "Tùy chọn": cartItem.options.map(optionId => {
+                            return menuData.find(item => item.id === optionId).name;
+                        }),
+                        "Ghi chú món": cartItem.note || "Không có"
+                    };
+                })
+            };
 
-            checkoutModal.classList.add('hidden');
-            paymentModal.classList.remove('hidden');
+            const webhookUrl = 'https://webhook.phogahon.io.vn/webhook/a53ee0e3-a828-4015-aba1-0f1d14f365bc';
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(finalJson),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Lỗi Webhook: ${response.statusText}`);
+                }
+
+                // Nếu gửi webhook thành công, hiển thị JSON trong modal
+                jsonOutputContent.textContent = JSON.stringify(finalJson, null, 2);
+                checkoutModal.classList.add('hidden');
+                jsonOutputModal.classList.remove('hidden'); 
+
+            } catch (error) {
+                console.error('Lỗi khi gửi webhook:', error);
+                checkoutError.textContent = 'Không thể gửi đơn hàng. Vui lòng thử lại sau.';
+                checkoutError.classList.remove('hidden');
+            } finally {
+                // Luôn kích hoạt lại nút dù thành công hay thất bại
+                confirmCheckoutBtn.disabled = false;
+                confirmCheckoutBtn.textContent = 'Xác nhận';
+            }
         };
 
         const handleCloseAllModalsAndReset = () => {
-            paymentModal.classList.add('hidden');
+            successModal.classList.add('hidden');
             checkoutModal.classList.add('hidden');
             customizationModal.classList.add('hidden');
+            jsonOutputModal.classList.add('hidden');
             
             cart = [];
             phoneInput.value = '';
-            addressInput.value = '';
-            document.getElementById('name').value = '';
+            nameInput.value = '';
+            orderNoteInput.value = '';
             renderCart();
         };
 
@@ -466,6 +600,12 @@
             if (e.target.classList.contains('remove-from-cart-btn')) {
                 handleRemoveFromCart(e.target.dataset.cartItemId);
             }
+            if (e.target.classList.contains('increase-quantity-btn')) {
+                handleIncreaseQuantity(e.target.dataset.cartItemId);
+            }
+            if (e.target.classList.contains('decrease-quantity-btn')) {
+                handleDecreaseQuantity(e.target.dataset.cartItemId);
+            }
         });
 
         addCustomizedItemBtn.addEventListener('click', handleAddCustomizedItem);
@@ -475,9 +615,14 @@
         cancelCheckoutBtn.addEventListener('click', () => checkoutModal.classList.add('hidden'));
         confirmCheckoutBtn.addEventListener('click', handleConfirmCheckout);
 
-        closePaymentModalBtn.addEventListener('click', handleCloseAllModalsAndReset);
+        closeJsonModalBtn.addEventListener('click', () => {
+            jsonOutputModal.classList.add('hidden');
+            successModal.classList.remove('hidden'); // Hiển thị modal thành công SAU KHI đóng modal JSON
+        });
+
+        closeSuccessModalBtn.addEventListener('click', handleCloseAllModalsAndReset);
         
-        [checkoutModal, paymentModal, customizationModal].forEach(modal => {
+        [checkoutModal, successModal, customizationModal, jsonOutputModal].forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.classList.add('hidden');
@@ -493,4 +638,3 @@
 
 </body>
 </html>
-
