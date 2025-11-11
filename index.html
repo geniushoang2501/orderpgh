@@ -27,13 +27,13 @@
 <body class="bg-gray-50">
 
     <!-- Main Container -->
-    <div class="container mx-auto p-4 lg:p-8">
-        <header class="text-center mb-8">
+    <div class="container mx-auto p-3 lg:p-6">
+        <header class="text-center mb-6">
             <h1 class="text-4xl md:text-5xl font-bold text-yellow-900">Phở Gà Hớn</h1>
             <p class="text-gray-600 mt-2">Cỗ máy Tăng trưởng - Đặt hàng và trải nghiệm ngay!</p>
         </header>
 
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col lg:flex-row gap-6">
             <!-- Menu Section -->
             <main id="menu-container" class="w-full lg:w-2/3">
                 <!-- Menu categories injected by JS -->
@@ -41,15 +41,15 @@
 
             <!-- Cart Section -->
             <aside class="w-full lg:w-1/3">
-                <div class="bg-white rounded-lg shadow-lg p-6 sticky top-8">
-                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-4 mb-4 flex items-center justify-between">
+                <div class="bg-white rounded-lg shadow-lg p-4 sticky top-8">
+                    <h2 class="text-2xl font-bold text-gray-800 border-b pb-2 mb-2 flex items-center justify-between">
                         <span>Giỏ Hàng Của Bạn</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                     </h2>
                     <div id="cart-items" class="max-h-96 overflow-y-auto custom-scrollbar pr-2">
                         <p id="empty-cart-message" class="text-gray-500 text-center py-8">Giỏ hàng đang trống...</p>
                     </div>
-                    <div id="cart-summary" class="border-t pt-4 mt-4">
+                    <div id="cart-summary" class="border-t pt-3 mt-3">
                         <div class="flex justify-between items-center font-bold text-lg">
                             <span class="text-gray-800">Tổng Cộng:</span>
                             <span id="total-price" class="text-yellow-700">0 VNĐ</span>
@@ -72,10 +72,10 @@
     <!-- Checkout Info Modal -->
     <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div class="p-6 border-b">
+            <div class="p-4 border-b">
                 <h3 class="text-2xl font-bold text-gray-900">Thông tin đơn hàng</h3>
             </div>
-            <div class="p-6 space-y-4">
+            <div class="p-4 space-y-3">
                 <div>
                     <label for="phone" class="block text-sm font-medium text-gray-700">Số điện thoại <span class="text-red-500">*</span></label>
                     <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500">
@@ -90,63 +90,49 @@
                 </div>
                 <p id="checkout-error" class="text-red-500 text-sm hidden">Vui lòng điền đầy đủ thông tin bắt buộc.</p>
             </div>
-            <div class="p-6 bg-gray-50 rounded-b-lg flex justify-end gap-4">
-                 <button id="cancel-checkout-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">Hủy</button>
+            <div class="p-4 bg-gray-50 rounded-b-lg flex justify-end gap-4">
+                 <button id="cancel-checkout-btn" class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition-colors">Hủy</button>
                  <button id="confirm-checkout-btn" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors">Xác nhận</button>
             </div>
         </div>
     </div>
 
-    <!-- Order Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Đặt hàng thành công!</h3>
-            <p class="text-gray-600 mb-6">Cảm ơn bạn đã đặt hàng. Phở Gà Hớn sẽ chuẩn bị món ngay!</p>
-            <button id="close-success-modal-btn" class="w-full mt-8 bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition-colors">
-                Tuyệt vời!
-            </button>
-        </div>
-    </div>
-
-    <!-- Customization Modal -->
+    <!-- Customization Modal (Re-adding) -->
     <div id="customization-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
-            <div class="p-6 border-b">
-                <h3 id="modal-item-name" class="text-2xl font-bold text-gray-900">Tùy chỉnh món ăn</h3>
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full">
+            <div class="p-4 border-b">
+                <h3 id="modal-item-name" class="text-2xl font-bold text-gray-900">Tùy chỉnh món</h3>
             </div>
-            <div class="p-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
-                <div id="modal-options-container"></div>
+            <div class="p-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                <div id="modal-options-container">
+                    <!-- Options injected by JS -->
+                </div>
                 <div class="mt-4">
                     <label for="item-note" class="block text-sm font-medium text-gray-700">Ghi chú cho món</label>
                     <input type="text" id="item-note" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500" placeholder="VD: Không hành, nhiều giá...">
                 </div>
             </div>
-            <div class="p-6 bg-gray-50 rounded-b-lg flex justify-end gap-4">
-                 <button id="cancel-customization-btn" class="bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors">Hủy</button>
+            <div class="p-4 bg-gray-50 rounded-b-lg flex justify-end gap-4">
+                 <button id="cancel-customization-btn" class="bg-gray-300 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-400 transition-colors">Hủy</button>
                  <button id="add-customized-item-btn" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors">Thêm vào giỏ</button>
             </div>
         </div>
     </div>
 
-    <!-- JSON Output Modal -->
-    <div id="json-output-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full">
-            <div class="p-6 border-b">
-                <h3 class="text-2xl font-bold text-gray-900">JSON Gửi Đi (Mẫu)</h3>
-            </div>
-            <div class="p-6">
-                <pre id="json-output-content" class="bg-gray-100 p-4 rounded-md text-sm overflow-auto max-h-[60vh] custom-scrollbar"></pre>
-            </div>
-            <div class="p-6 bg-gray-50 rounded-b-lg flex justify-end gap-4">
-                 <button id="close-json-modal-btn" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors">Đã hiểu & Hoàn tất</button>
-            </div>
+    <!-- Success Modal (Re-adding) -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full text-center p-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 class="text-2xl font-bold text-gray-900 mt-4">Đặt hàng thành công!</h3>
+            <p class="text-gray-600 mt-2">Cảm ơn bạn đã đặt hàng tại Phở Gà Hớn.</p>
+            <button id="close-success-modal-btn" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition-colors mt-6">Đóng</button>
         </div>
     </div>
 
-
+    <!-- JSON Output Modal (REMOVED) -->
+    
     <script>
         // --- DATA ---
         const menuData = [
@@ -176,7 +162,7 @@
             { id: 31, name: 'Phở 250g', category: 'Tùy chọn Sợi', price: 0, desc: 'Cực nhiều phở.' },
             { id: 32, name: 'Bún', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi bún tươi.' },
             { id: 33, name: 'Mì', category: 'Tùy chọn Sợi', price: 0, desc: 'Sợi mì trứng vàng óng.' },
-            { id: 34, name: 'Mì 2 gói', category: 'Tùy chọn Sợi', price: 0, desc: 'Gấp đôi mì.' },
+            { id: 34, name: 'Mì 2 gói', category: 'Tùy chọn Sợi', price: 5000, desc: 'Gấp đôi mì, thêm 5,000đ.' },
             
             // Tùy chọn Thịt
             { id: 5, name: 'Lườn', category: 'Tùy chọn Thịt', price: 0, desc: 'Phần thịt ức gà mềm.' },
@@ -219,9 +205,10 @@
         const successModal = document.getElementById('success-modal');
         const closeSuccessModalBtn = document.getElementById('close-success-modal-btn');
 
-        const jsonOutputModal = document.getElementById('json-output-modal');
-        const jsonOutputContent = document.getElementById('json-output-content');
-        const closeJsonModalBtn = document.getElementById('close-json-modal-btn');
+        // JSON Modal elements removed
+        // const jsonOutputModal = document.getElementById('json-output-modal');
+        // const jsonOutputContent = document.getElementById('json-output-content');
+        // const closeJsonModalBtn = document.getElementById('close-json-modal-btn');
 
 
         // --- FUNCTIONS ---
@@ -231,26 +218,33 @@
             const categories = [...new Set(menuData.map(item => item.category))];
             const categoryOrder = ['Món Chính', 'Món phụ', 'Đồ uống']; // Thêm Món phụ
             const sortedCategories = categories.filter(c => categoryOrder.includes(c)).sort((a, b) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b));
+            
+            const categoryColors = {
+                'Món Chính': 'text-yellow-800',
+                'Món phụ': 'text-sky-700',
+                'Đồ uống': 'text-green-700'
+            };
 
             menuContainer.innerHTML = sortedCategories.map(category => {
                 const itemsInCategory = menuData.filter(item => item.category === category);
+                const colorClass = categoryColors[category] || 'text-gray-800'; // Fallback
                 return `
-                    <section class="mb-8">
-                        <h2 class="text-2xl md:text-3xl font-bold text-yellow-800 mb-4 pb-2 border-b-2 border-yellow-200">${category}</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <section class="mb-6">
+                        <h2 class="text-2xl font-bold ${colorClass} mb-3 pb-1 border-b-2 border-gray-200">${category}</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             ${itemsInCategory.map(item => `
-                                <div class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-gray-800">${item.name}</h3>
-                                        <p class="text-gray-600 text-sm mt-1">${item.desc}</p>
-                                    </div>
-                                    <div class="flex justify-between items-center mt-4">
-                                        <div class="font-semibold text-yellow-700 text-lg">
+                                <div class="bg-white rounded-lg shadow-md p-3 flex items-center justify-between transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+                                    <!-- Left: Name -->
+                                    <h3 class="text-lg font-bold text-gray-800 flex-1 truncate">${item.name}</h3>
+                                    
+                                    <!-- Right: Price and Button -->
+                                    <div class="flex items-center gap-3 ml-3">
+                                        <div class="font-semibold text-yellow-700 text-lg whitespace-nowrap">
                                             <span>${formatCurrency(item.price)}</span>
                                             ${item.originalPrice ? `<span class="text-sm text-gray-500 line-through ml-2">${formatCurrency(item.originalPrice)}</span>` : ''}
                                         </div>
-                                        <button class="add-item-btn bg-yellow-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors" data-id="${item.id}">
-                                            Thêm
+                                        <button class="add-item-btn bg-yellow-500 text-white font-bold h-10 w-10 text-2xl rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center flex-shrink-0" data-id="${item.id}">
+                                            +
                                         </button>
                                     </div>
                                 </div>
@@ -275,32 +269,32 @@
                     const unitPrice = baseItem.price + optionsPrice;
 
                     return `
-                        <div class="mb-4 py-2 border-b border-gray-100">
+                        <div class="mb-2 py-1 border-b border-gray-100">
                             <div class="flex justify-between items-start">
                                 <p class="font-bold text-gray-800">${baseItem.name}</p>
                                 <button class="remove-from-cart-btn text-red-500 hover:text-red-700 font-semibold" data-cart-item-id="${cartItem.cartItemId}">Xóa</button>
                             </div>
                             
                             <!-- Quantity and Price -->
-                            <div class="flex justify-between items-center mt-2">
+                            <div class="flex justify-between items-center mt-1">
                                 <div class="flex items-center gap-3">
-                                    <button class="decrease-quantity-btn text-yellow-600 font-bold text-xl" data-cart-item-id="${cartItem.cartItemId}">-</button>
+                                    <button class="decrease-quantity-btn bg-gray-100 text-yellow-700 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xl hover:bg-gray-200" data-cart-item-id="${cartItem.cartItemId}">-</button>
                                     <span class="font-bold text-gray-800 text-lg">${cartItem.quantity}</span>
-                                    <button class="increase-quantity-btn text-yellow-600 font-bold text-xl" data-cart-item-id="${cartItem.cartItemId}">+</button>
+                                    <button class="increase-quantity-btn bg-gray-100 text-yellow-700 font-bold w-6 h-6 rounded-full flex items-center justify-center text-xl hover:bg-gray-200" data-cart-item-id="${cartItem.cartItemId}">+</button>
                                 </div>
                                 <p class="text-sm text-yellow-600 font-semibold">${formatCurrency(unitPrice * cartItem.quantity)}</p>
                             </div>
                             
-                            ${cartItem.options.length > 0 ? `
-                                <ul class="mt-2 pl-4 list-disc list-inside text-sm text-gray-600">
+                            ${(cartItem.options.length > 0 || cartItem.note) ? `
+                                <p class="mt-1 text-sm text-gray-600 truncate">
                                     ${cartItem.options.map(optionId => {
                                         const optionItem = menuData.find(item => item.id === optionId);
                                         const priceString = optionItem.price > 0 ? ` (+${formatCurrency(optionItem.price)})` : '';
-                                        return `<li>${optionItem.name}${priceString}</li>`;
-                                    }).join('')}
-                                </ul>
+                                        return `${optionItem.name}${priceString}`;
+                                    }).join(', ')}
+                                    ${cartItem.note ? `<span class="italic"> (Ghi chú: ${cartItem.note})</span>` : ''}
+                                </p>
                             ` : ''}
-                            ${cartItem.note ? `<p class="text-sm text-gray-500 italic mt-1 pl-1">Ghi chú: ${cartItem.note}</p>` : ''}
                         </div>
                     `;
                 }).join('');
@@ -335,10 +329,10 @@
             
             const sizeOptions = menuData.filter(opt => opt.category === 'Tùy chọn Size');
             const sizeOptionsHtml = `
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Kích cỡ <span class="text-red-500">*</span></h4>
+                <div class="mb-4">
+                    <h4 class="font-bold text-gray-700 mb-1 border-b pb-1">Kích cỡ <span class="text-red-500">*</span></h4>
                     ${sizeOptions.map((opt, index) => `
-                        <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+                        <label class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 cursor-pointer">
                             <div>
                                 <span class="text-gray-800">${opt.name}</span>
                                 ${opt.price > 0 ? `<span class="text-sm text-yellow-600 ml-2">+${formatCurrency(opt.price)}</span>` : ''}
@@ -351,10 +345,10 @@
             
             const noodleOptions = menuData.filter(opt => opt.category === 'Tùy chọn Sợi');
             const noodleOptionsHtml = `
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Sợi <span class="text-red-500">*</span></h4>
+                <div class="mb-4">
+                    <h4 class="font-bold text-gray-700 mb-1 border-b pb-1">Tùy chọn Sợi <span class="text-red-500">*</span></h4>
                     ${noodleOptions.map((opt, index) => `
-                        <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+                        <label class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 cursor-pointer">
                             <span class="text-gray-800">${opt.name}</span>
                             <input type="radio" name="noodle-option" class="form-radio h-5 w-5 text-yellow-600 focus:ring-yellow-500" data-option-id="${opt.id}" ${index === 0 ? 'checked' : ''}>
                         </label>
@@ -364,10 +358,10 @@
             
             const meatOptions = menuData.filter(opt => opt.category === 'Tùy chọn Thịt');
             const meatOptionsHtml = `
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Tùy chọn Thịt <span class="text-red-500">*</span></h4>
+                <div class="mb-4">
+                    <h4 class="font-bold text-gray-700 mb-1 border-b pb-1">Tùy chọn Thịt <span class="text-red-500">*</span></h4>
                     ${meatOptions.map((opt, index) => `
-                        <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+                        <label class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 cursor-pointer">
                             <div>
                                 <span class="text-gray-800">${opt.name}</span>
                                 ${opt.price > 0 ? `<span class="text-sm text-yellow-600 ml-2">+${formatCurrency(opt.price)}</span>` : ''}
@@ -383,9 +377,9 @@
                 if (optionsInCategory.length === 0) return '';
                 return `
                     <div class="mb-4">
-                        <h4 class="font-bold text-gray-700 mb-2 border-b pb-2">Topping thêm</h4>
+                        <h4 class="font-bold text-gray-700 mb-1 border-b pb-1">Topping thêm</h4>
                         ${optionsInCategory.map(opt => `
-                            <label class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 cursor-pointer">
+                            <label class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-100 cursor-pointer">
                                 <div>
                                     <span class="text-gray-800">${opt.name}</span>
                                     <span class="text-sm text-yellow-600 ml-2">+${formatCurrency(opt.price)}</span>
@@ -555,10 +549,9 @@
                     throw new Error(`Lỗi Webhook: ${response.statusText}`);
                 }
 
-                // Nếu gửi webhook thành công, hiển thị JSON trong modal
-                jsonOutputContent.textContent = JSON.stringify(finalJson, null, 2);
+                // Nếu gửi webhook thành công, hiển thị modal thành công
                 checkoutModal.classList.add('hidden');
-                jsonOutputModal.classList.remove('hidden'); 
+                successModal.classList.remove('hidden'); 
 
             } catch (error) {
                 console.error('Lỗi khi gửi webhook:', error);
@@ -575,7 +568,7 @@
             successModal.classList.add('hidden');
             checkoutModal.classList.add('hidden');
             customizationModal.classList.add('hidden');
-            jsonOutputModal.classList.add('hidden');
+            // jsonOutputModal.classList.add('hidden'); // Removed
             
             cart = [];
             phoneInput.value = '';
@@ -615,14 +608,12 @@
         cancelCheckoutBtn.addEventListener('click', () => checkoutModal.classList.add('hidden'));
         confirmCheckoutBtn.addEventListener('click', handleConfirmCheckout);
 
-        closeJsonModalBtn.addEventListener('click', () => {
-            jsonOutputModal.classList.add('hidden');
-            successModal.classList.remove('hidden'); // Hiển thị modal thành công SAU KHI đóng modal JSON
-        });
+        // JSON Modal listener removed
+        // closeJsonModalBtn.addEventListener('click', () => { ... });
 
         closeSuccessModalBtn.addEventListener('click', handleCloseAllModalsAndReset);
         
-        [checkoutModal, successModal, customizationModal, jsonOutputModal].forEach(modal => {
+        [checkoutModal, successModal, customizationModal].forEach(modal => { // Removed jsonOutputModal
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.classList.add('hidden');
